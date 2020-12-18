@@ -9,20 +9,19 @@ def pingOk(sHost):
 		# create text call for debugging (why don't people do this on SO????)
 		TEXT1 = "ping -{} 5 {}".format('n' if platform.system().lower()=="windows" else 'c', sHost)		
 		#print(TEXT1)
-		output = subprocess.run(TEXT1, shell=True,capture_output=True)
+		output = subprocess.run(TEXT1, shell=True,capture_output=True).stdout
 		#print(output.stdout)
 		# split into lines:
-		outbytes = output.stdout.splitlines()
-		outline = [x.decode('utf-8') for x in outbytes]
+		output = output.splitlines()
 		#print(outline)
 		stats = ['NA', 'NA']
 		dropped = ['NA', 'NA']
-		for i in range(len(outline)):
+		for i in range(len(output)):
 			#print(outline[i])
-			if re.search(r"%",outline[i]):
-				dropped = re.findall(r'[0-9.]*%', outline[i])
-			if re.search(r"round-trip",outline[i]):
-				stats = re.findall(r'[0-9./]* ms', outline[i])
+			if re.search(r"%",output[i]):
+				dropped = re.findall(r'[0-9.]*%', output[i])
+			if re.search(r"round-trip",output[i]):
+				stats = re.findall(r'[0-9./]* ms', output[i])
 				print(stats)
 				stats = re.sub(r' ms','',stats)
 				stats = re.sub(r'/',',',stats)
@@ -48,7 +47,7 @@ def writetolog(LOGFILE, text2write):
 
 PING_LIST = ['192.168.0.106', '192.168.1.1', 'www.google.com', '75.118.76.201' ]
 SPEEDTEST = ''
-LOGFILE   = '~/internetlog.txt'
+LOGFILE   = 'internetlog.txt'
 
 import subprocess, platform, re, datetime, os, sys
 
