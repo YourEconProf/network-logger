@@ -48,7 +48,7 @@ def writetolog(LOGFILE, text2write):
 
 PING_LIST = ['192.168.0.106', '192.168.1.1', 'www.google.com', '75.118.76.201' ]
 SPEEDTEST = ''
-LOGFILE   = 'internetlog.txt'
+LOGFILE   = '~/internetlog.txt'
 
 import subprocess, platform, re, datetime, os, sys
 
