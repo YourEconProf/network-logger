@@ -1,3 +1,5 @@
+#!/usr/local/bin/python3
+
 # home-network-logger periodically scans a home network
 # to assist in diagnosing internet connectivity 
 # problems
