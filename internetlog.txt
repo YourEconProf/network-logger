@@ -1,0 +1,4 @@
+2020-12-17 20:40:31,Matts-MacBook.local,192.168.0.106,1,0.0%
+2020-12-17 20:40:35,Matts-MacBook.local,192.168.1.1,1,0.0%
+2020-12-17 20:40:39,Matts-MacBook.local,www.google.com,2,0.0%
+2020-12-17 20:40:43,Matts-MacBook.local,75.118.76.201,NA,100.0%

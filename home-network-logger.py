@@ -9,19 +9,18 @@ def pingOk(sHost):
 		# create text call for debugging (why don't people do this on SO????)
 		TEXT1 = "ping -{} 5 {}".format('n' if platform.system().lower()=="windows" else 'c', sHost)		
 		#print(TEXT1)
-		output = subprocess.run(TEXT1, shell=True,capture_output=True).stdout
-		#print(output.stdout)
-		# split into lines:
-		output = output.splitlines()
-		#print(outline)
+		output = subprocess.run(TEXT1, shell=True,capture_output=True).stdout.decode('utf-8').splitlines()
+		#print(output)
 		stats = ['NA', 'NA']
 		dropped = ['NA', 'NA']
 		for i in range(len(output)):
 			#print(outline[i])
 			if re.search(r"%",output[i]):
+				#print(i)
 				dropped = re.findall(r'[0-9.]*%', output[i])
 			if re.search(r"round-trip",output[i]):
-				stats = re.findall(r'[0-9./]* ms', output[i])
+				print(output[i])
+				stats = re.findall(r'[0-9./]* ms', output[i])[0]
 				print(stats)
 				stats = re.sub(r' ms','',stats)
 				stats = re.sub(r'/',',',stats)
