@@ -4,27 +4,29 @@
 
 def pingOk(sHost):
 	now = datetime.datetime.now()
-	dt_string = now.strftime("%Y-%m-%d %H:%M:%S")
+	dt_string = now.strftime("%Y:%m:%d:%H:%M:%S")
 	try:
 		# create text call for debugging (why don't people do this on SO????)
 		TEXT1 = "ping -{} 5 {}".format('n' if platform.system().lower()=="windows" else 'c', sHost)		
 		#print(TEXT1)
 		output = subprocess.run(TEXT1, shell=True,capture_output=True).stdout.decode('utf-8').splitlines()
 		#print(output)
-		stats = ['NA', 'NA']
-		dropped = ['NA', 'NA']
+		stats = 'NA'
+		dropped = 'NA'
 		for i in range(len(output)):
 			#print(outline[i])
 			if re.search(r"%",output[i]):
 				#print(i)
 				dropped = re.findall(r'[0-9.]*%', output[i])
 			if re.search(r"round-trip",output[i]):
-				print(output[i])
+				#print(output[i])
 				stats = re.findall(r'[0-9./]* ms', output[i])[0]
-				print(stats)
+				#print(stats)
 				stats = re.sub(r' ms','',stats)
+				#print(stats)
 				stats = re.sub(r'/',',',stats)
-		output = (dt_string + "," + platform.node() + "," + sHost + "," + stats[0] + "," + dropped[0])
+				print(type(stats))
+		output = (dt_string + "," + platform.node() + "," + sHost + "," + stats + "," + dropped[0])
 
 	except Exception:
 		output = ("Oops: " + dt_string + " " + platform.node() + " " + sHost + " " + sys.exc_info()[0])
