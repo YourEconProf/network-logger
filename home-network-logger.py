@@ -25,7 +25,7 @@ def pingOk(sHost):
 				stats = re.sub(r' ms','',stats)
 				#print(stats)
 				stats = re.sub(r'/',',',stats)
-				print(type(stats))
+				#print(type(stats))
 		output = (dt_string + "," + platform.node() + "," + sHost + "," + stats + "," + dropped[0])
 
 	except Exception:
